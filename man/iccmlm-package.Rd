@@ -3,7 +3,7 @@
 \docType{package}
 \name{iccmlm-package}
 \alias{iccmlm-package}
-\title{iccmlm: Calculate ICC from a multilevel model fitted by the lme4 package}
+\title{iccmlm: Calculate ICC from a multilevel model fitted by the lme4 package.}
 \description{
-iccmlm: Calculate ICC from a multilevel model fitted by the lme4 package
+iccmlm: Calculate ICC from a multilevel model fitted by the lme4 package.
 }

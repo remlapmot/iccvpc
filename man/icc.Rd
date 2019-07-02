@@ -2,7 +2,7 @@
 % Please edit documentation in R/icc.R
 \name{icc}
 \alias{icc}
-\title{ICC from an object of class lmerMod or glmerMod}
+\title{Calculate ICC from an object of class lmerMod or glmerMod.}
 \usage{
 icc(model)
 }
@@ -13,5 +13,5 @@ icc(model)
 Object of class iccmlm containing the ICC.
 }
 \description{
-ICC from an object of class lmerMod or glmerMod
+Calculate ICC from an object of class lmerMod or glmerMod.
 }

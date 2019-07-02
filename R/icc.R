@@ -1,4 +1,4 @@
-#' ICC from an object of class lmerMod or glmerMod
+#' Calculate ICC from an object of class lmerMod or glmerMod.
 #'
 #' @param model Object of class either lmerMod or glmerMod (fitted with family = "gaussian").
 #' 
@@ -37,6 +37,10 @@ icc <- function(model) {
 #' @param x Object of class iccmlm
 #' 
 #' @export
-print.iccmlm <- function(x, digits = getOption("digits"), ...) {
-  cat("\n Intra-class correlation coefficient:", print(x, digits = digits))
+print.iccmlm <- function(x, digits = getOption("digits"), percent = FALSE, ...) {
+  if (!percent) {
+    cat("\n Intra-class correlation coefficient:", print(x, digits = digits))  
+  } else {
+    cat("\n Intra-class correlation coefficient:", print(x * 100, digits = digits), "%")
+  }
 }
