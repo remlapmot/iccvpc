@@ -35,12 +35,18 @@ icc <- function(model) {
 #' print method for an object of class iccmlm
 #'
 #' @param x Object of class iccmlm
+#' @param digits minimal number of \emph{significant} digits, see \code{\link{print.default}}.
+#' @param percent Logical indicating whether the ICC should be reported as a percentage.
 #' 
 #' @export
 print.iccmlm <- function(x, digits = getOption("digits"), percent = FALSE, ...) {
   if (!percent) {
-    cat("\n Intra-class correlation coefficient:", print(x, digits = digits))  
+    cat("\nIntra-class correlation coefficient: ")
+    cat(round(x[1], digits = digits))
   } else {
-    cat("\n Intra-class correlation coefficient:", print(x * 100, digits = digits), "%")
+    cat("\nIntra-class correlation coefficient: ")
+    cat(round(x[1] * 100, digits = digits))
+    cat("%")
   }
+  invisible(x)
 }
