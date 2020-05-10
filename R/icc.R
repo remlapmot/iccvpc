@@ -1,9 +1,9 @@
-#' Calculate ICC from an object of class lmerMod or glmerMod.
+#' Calculate ICC from an object of class lmerMod or glmerMod
 #'
-#' @param model Object of class either lmerMod or glmerMod (fitted with family = "gaussian").
+#' @param model Object of class either `lmerMod` or `glmerMod` (fitted with `family = "gaussian"`).
 #' 
 #' @export
-#' @return Object of class iccmlm containing the ICC.
+#' @return Object of class `iccmlm` containing the ICC.
 icc <- function(model) {
 
   clmod <- class(model)[1]
@@ -51,22 +51,20 @@ print.iccmlm <- function(x, digits = getOption("digits"), percent = FALSE, ...) 
   invisible(x)
 }
 
-#' Calculate ICC with indices (i.e. subset of the data)
-iccmodel <- function(data, formula, indices){
+#' Calculate ICC with indices (i.e. on a subset of the data)
+iccmodel <- function(data, fit, indices){
   d <- data[indices, ]
-  fit <- lme4::lmer(mathach ~ (1 | school), data = d)
-  vc <- lme4::VarCorr(fit)
-  resvar <- attr(vc, "sc")^2
-  intvar <- vc$school[1,1]
-  icc <- intvar/(resvar + intvar)
-  return(icc)
+  fit <- lme4::lmer(formula(fit), data = d)
+  icc(fit)
 }
 
 #' Bootstrap standard error for the ICC
 #' 
 #' @export
-bootse.iccmlm <- function(...) {
+bootci.iccmlm <- function(seed, ...) {
+  if (exists(seed)) set.seed(seed)
   if (!exists("R")) R <- 50
-  bsrun <- boot::boot(data = dat, iccmodel, R = R, ...)
-  return(bsrun)
+  bsrun <- boot::boot(data = dat, statistic = iccmodel, R = R, ...)
+  bci <- boot::boot.ci(bsrun, type = 'norm')
+  return(list(bci = c(bci$normal[1], bci$normal[2:3] + bias)))
 }
