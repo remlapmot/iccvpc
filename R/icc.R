@@ -37,6 +37,7 @@ icc <- function(model) {
 #' @param x Object of class iccmlm
 #' @param digits minimal number of \emph{significant} digits, see \code{\link{print.default}}.
 #' @param percent Logical indicating whether the ICC should be reported as a percentage.
+#' @param ... Additional arguments passed to [`print`].
 #' 
 #' @export
 print.iccmlm <- function(x, digits = getOption("digits"), percent = FALSE, ...) {
@@ -52,7 +53,12 @@ print.iccmlm <- function(x, digits = getOption("digits"), percent = FALSE, ...) 
 }
 
 #' Calculate ICC with indices (i.e. on a subset of the data)
+#' 
+#' @param data The data the model is fitted to.
+#' @param indices The indices that boot::boot() uses to select the replicate samples.
+#' @param fit The fitted model object which the ICC is for.
 #' @importFrom stats update
+#' @keywords internal
 iccmodel <- function(data, indices, fit){
   d <- data[indices, ]
   fit <- update(fit, data = d)
@@ -61,6 +67,8 @@ iccmodel <- function(data, indices, fit){
 
 #' Bootstrap standard error for the ICC
 #' 
+#' @param x An object of class `iccmlm`.
+#' @param ... Further arguments passed to [boot::boot()].
 #' @export
 bootci <- function(x, ...) {
   UseMethod("bootci")  
