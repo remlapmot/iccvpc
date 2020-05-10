@@ -4,8 +4,7 @@
 \alias{print.iccmlm}
 \title{print method for an object of class iccmlm}
 \usage{
-\method{print}{iccmlm}(x, digits = getOption("digits"),
-  percent = FALSE, ...)
+\method{print}{iccmlm}(x, digits = getOption("digits"), percent = FALSE, ...)
 }
 \arguments{
 \item{x}{Object of class iccmlm}

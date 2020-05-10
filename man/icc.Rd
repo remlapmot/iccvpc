@@ -2,16 +2,16 @@
 % Please edit documentation in R/icc.R
 \name{icc}
 \alias{icc}
-\title{Calculate ICC from an object of class lmerMod or glmerMod.}
+\title{Calculate ICC from an object of class lmerMod or glmerMod}
 \usage{
 icc(model)
 }
 \arguments{
-\item{model}{Object of class either lmerMod or glmerMod (fitted with family = "gaussian").}
+\item{model}{Object of class either \code{lmerMod} or \code{glmerMod} (fitted with \code{family = "gaussian"}).}
 }
 \value{
-Object of class iccmlm containing the ICC.
+Object of class \code{iccmlm} containing the ICC.
 }
 \description{
-Calculate ICC from an object of class lmerMod or glmerMod.
+Calculate ICC from an object of class lmerMod or glmerMod
 }
