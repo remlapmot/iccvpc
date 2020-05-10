@@ -51,10 +51,22 @@ print.iccmlm <- function(x, digits = getOption("digits"), percent = FALSE, ...) 
   invisible(x)
 }
 
+#' Calculate ICC with indices (i.e. subset of the data)
+iccmodel <- function(data, formula, indices){
+  d <- data[indices, ]
+  fit <- lme4::lmer(mathach ~ (1 | school), data = d)
+  vc <- lme4::VarCorr(fit)
+  resvar <- attr(vc, "sc")^2
+  intvar <- vc$school[1,1]
+  icc <- intvar/(resvar + intvar)
+  return(icc)
+}
+
 #' Bootstrap standard error for the ICC
 #' 
 #' @export
-bootse.iccmlm <- function() {
-  
-  
+bootse.iccmlm <- function(...) {
+  if (!exists("R")) R <- 50
+  bsrun <- boot::boot(data = dat, iccmodel, R = R, ...)
+  return(bsrun)
 }
