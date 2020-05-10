@@ -1,7 +1,5 @@
 # Tests for lme4icc package
-# 2019-01-22
 
-library(iccmlm)
 require(lme4)
 require(nlme)
 
@@ -40,4 +38,10 @@ test_that("Check exactly what is printed", {
 
 test_that("Check percent option to print gives percent sign at end", {
   expect_output(print(iccpkg, percent = TRUE, digits = 2), "\\nIntra-class correlation coefficient: 68.57%")  
+})
+
+test_that("Check bootstrap standard error and CI", {
+  bt <- bootci(data = Orthodont, 
+               fit = fm1, 
+               seed = 20200510)
 })
