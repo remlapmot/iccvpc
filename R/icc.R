@@ -61,7 +61,7 @@ iccmodel <- function(data, indices, fit){
 #' Bootstrap standard error for the ICC
 #' 
 #' @export
-bootci.iccmlm <- function(data, fit, seed, ...) {
+bootci.iccmlm <- function(fit, data, seed, ...) {
   if (exists(seed)) set.seed(seed)
   if (!exists("R")) R <- 50
   bsrun <- boot::boot(data = dat, 
