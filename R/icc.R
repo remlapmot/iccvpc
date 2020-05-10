@@ -52,7 +52,7 @@ print.iccmlm <- function(x, digits = getOption("digits"), percent = FALSE, ...) 
 }
 
 #' Calculate ICC with indices (i.e. on a subset of the data)
-iccmodel <- function(data, fit, indices){
+iccmodel <- function(data, indices, fit){
   d <- data[indices, ]
   fit <- lme4::lmer(formula(fit), data = d)
   icc(fit)
@@ -61,10 +61,14 @@ iccmodel <- function(data, fit, indices){
 #' Bootstrap standard error for the ICC
 #' 
 #' @export
-bootci.iccmlm <- function(seed, ...) {
+bootci.iccmlm <- function(data, fit, seed, ...) {
   if (exists(seed)) set.seed(seed)
   if (!exists("R")) R <- 50
-  bsrun <- boot::boot(data = dat, statistic = iccmodel, R = R, ...)
+  bsrun <- boot::boot(data = dat, 
+                      statistic = iccmodel, 
+                      R = R, 
+                      fit = fit, 
+                      ...)
   bci <- boot::boot.ci(bsrun, type = 'norm')
   return(list(bci = c(bci$normal[1], bci$normal[2:3] + bias)))
 }
