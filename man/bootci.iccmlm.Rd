@@ -4,7 +4,7 @@
 \alias{bootci.iccmlm}
 \title{Bootstrap standard error for the ICC}
 \usage{
-bootci.iccmlm(data, fit, seed, ...)
+bootci.iccmlm(fit, data, seed, ...)
 }
 \description{
 Bootstrap standard error for the ICC
