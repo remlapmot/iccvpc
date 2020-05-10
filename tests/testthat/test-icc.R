@@ -41,7 +41,10 @@ test_that("Check percent option to print gives percent sign at end", {
 })
 
 test_that("Check bootstrap standard error and CI", {
-  bt <- bootci(data = Orthodont, 
-               fit = fm1, 
-               seed = 20200510)
+  btci <- bootci(iccpkg,
+                 fit = fm1,
+                 data = Orthodont,
+                 seed = 20200510)
+  expect_equal(btci$bci[2], .5496791, tol = 1e-4)
+  expect_equal(btci$bci[3], .8217991, tol = 1e-4)
 })
