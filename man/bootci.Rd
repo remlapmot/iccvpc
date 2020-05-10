@@ -6,6 +6,11 @@
 \usage{
 bootci(x, ...)
 }
+\arguments{
+\item{x}{An object of class \code{iccmlm}.}
+
+\item{...}{Further arguments passed to \code{\link[boot:boot]{boot::boot()}}.}
+}
 \description{
 Bootstrap standard error for the ICC
 }

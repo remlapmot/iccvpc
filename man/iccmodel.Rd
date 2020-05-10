@@ -6,6 +6,14 @@
 \usage{
 iccmodel(data, indices, fit)
 }
+\arguments{
+\item{data}{The data the model is fitted to.}
+
+\item{indices}{The indices that boot::boot() uses to select the replicate samples.}
+
+\item{fit}{The fitted model object which the ICC is for.}
+}
 \description{
 Calculate ICC with indices (i.e. on a subset of the data)
 }
+\keyword{internal}

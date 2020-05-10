@@ -12,6 +12,8 @@
 \item{digits}{minimal number of \emph{significant} digits, see \code{\link{print.default}}.}
 
 \item{percent}{Logical indicating whether the ICC should be reported as a percentage.}
+
+\item{...}{Additional arguments passed to \code{\link{print}}.}
 }
 \description{
 print method for an object of class iccmlm
