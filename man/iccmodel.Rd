@@ -4,7 +4,7 @@
 \alias{iccmodel}
 \title{Calculate ICC with indices (i.e. on a subset of the data)}
 \usage{
-iccmodel(data, fit, indices)
+iccmodel(data, indices, fit)
 }
 \description{
 Calculate ICC with indices (i.e. on a subset of the data)
