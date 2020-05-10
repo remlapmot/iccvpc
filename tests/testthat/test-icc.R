@@ -1,7 +1,5 @@
 # Tests for lme4icc package
-# 2019-01-22
 
-library(iccmlm)
 require(lme4)
 require(nlme)
 
@@ -16,10 +14,9 @@ vcdf <- as.data.frame(vc, order = "lower.tri")
 iccfit <- vcdf[1, 4] / (vcdf[1, 4] + vcdf[2, 4])
 iccpkg <- icc(fm1)
 
-test_that("ICC for lme4::VarCorr() helpfile example",
-          {
-            expect_equivalent(iccpkg, iccfit, tol =  1e-3)
-          })
+test_that("ICC for lme4::VarCorr() helpfile example", {
+  expect_equivalent(iccpkg, iccfit, tol =  1e-3)
+})
 
 test_that("Pass model of incorrect class to icc()", {
   # Example from lm helpfile
@@ -31,10 +28,9 @@ test_that("Pass model of incorrect class to icc()", {
   expect_error(icc(lm.D9))
 })
 
-test_that("Test print method for class iccmlm",
-          {
-            expect_output(print(iccpkg))
-          })
+test_that("Test print method for class iccmlm", {
+  expect_output(print(iccpkg))
+})
 
 test_that("Check exactly what is printed", {
   expect_output(print(iccpkg, digits = 2), "\\nIntra-class correlation coefficient: 0.69")  
@@ -42,4 +38,13 @@ test_that("Check exactly what is printed", {
 
 test_that("Check percent option to print gives percent sign at end", {
   expect_output(print(iccpkg, percent = TRUE, digits = 2), "\\nIntra-class correlation coefficient: 68.57%")  
+})
+
+test_that("Check bootstrap standard error and CI", {
+  btci <- bootci(iccpkg,
+                 fit = fm1,
+                 data = Orthodont,
+                 seed = 20200510)
+  expect_equal(btci$bci[2], .5496791, tol = 1e-4)
+  expect_equal(btci$bci[3], .8217991, tol = 1e-4)
 })
