@@ -50,3 +50,11 @@ print.iccmlm <- function(x, digits = getOption("digits"), percent = FALSE, ...) 
   }
   invisible(x)
 }
+
+#' Bootstrap standard error for the ICC
+#' 
+#' @export
+bootse.iccmlm <- function() {
+  
+  
+}

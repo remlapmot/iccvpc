@@ -9,6 +9,7 @@ Depends: R (>= 3.2.0)
 Description: Calculate intra-class correlation coefficient from a multilevel model (fitted by the lme4 package).
 License: GPL-3
 Imports:
+    boot,
     lme4
 Suggests: 
     nlme,
