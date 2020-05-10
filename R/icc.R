@@ -52,9 +52,10 @@ print.iccmlm <- function(x, digits = getOption("digits"), percent = FALSE, ...) 
 }
 
 #' Calculate ICC with indices (i.e. on a subset of the data)
+#' @importFrom stats update
 iccmodel <- function(data, indices, fit){
   d <- data[indices, ]
-  fit <- lme4::lmer(formula(fit), data = d)
+  fit <- update(fit, data = d)
   icc(fit)
 }
 
