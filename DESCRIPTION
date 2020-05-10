@@ -1,7 +1,6 @@
 Package: iccmlm
 Title: Calculate intra-class correlation coefficient from a fitted linear outcome multilevel model fitted by lme4
 Version: 0.1.0
-Date: 2019-07-02
 Authors@R: person("Tom", "Palmer", 
   email = "tom.palmer@bristol.ac.uk", 
   role = c("aut", "cre"), 
@@ -15,3 +14,4 @@ Suggests:
     nlme,
     testthat
 RoxygenNote: 6.1.1
+Roxygen: list(markdown = TRUE)
