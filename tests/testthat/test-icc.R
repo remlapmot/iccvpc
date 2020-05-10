@@ -16,10 +16,9 @@ vcdf <- as.data.frame(vc, order = "lower.tri")
 iccfit <- vcdf[1, 4] / (vcdf[1, 4] + vcdf[2, 4])
 iccpkg <- icc(fm1)
 
-test_that("ICC for lme4::VarCorr() helpfile example",
-          {
-            expect_equivalent(iccpkg, iccfit, tol =  1e-3)
-          })
+test_that("ICC for lme4::VarCorr() helpfile example", {
+  expect_equivalent(iccpkg, iccfit, tol =  1e-3)
+})
 
 test_that("Pass model of incorrect class to icc()", {
   # Example from lm helpfile
@@ -31,10 +30,9 @@ test_that("Pass model of incorrect class to icc()", {
   expect_error(icc(lm.D9))
 })
 
-test_that("Test print method for class iccmlm",
-          {
-            expect_output(print(iccpkg))
-          })
+test_that("Test print method for class iccmlm", {
+  expect_output(print(iccpkg))
+})
 
 test_that("Check exactly what is printed", {
   expect_output(print(iccpkg, digits = 2), "\\nIntra-class correlation coefficient: 0.69")  
