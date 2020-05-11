@@ -1,10 +1,14 @@
 #' Calculate ICC from an object of class lmerMod or glmerMod
 #'
 #' @param model Object of class either `lmerMod` or `glmerMod` (fitted with `family = "gaussian"`).
+#' @param bci Logical, indicating whether to return a bootstrap confidence interval for the ICC. The default is `FALSE`.
+#' @param seed Random number seed to make the bootrstrapping reproducible.
+#' @param R The number of bootstrap replicates. The default is `50`.
+#' @param ... Further arguments passed to [boot::boot()] for the bootstrapping.
 #' 
 #' @export
 #' @return Object of class `iccmlm` containing the ICC.
-icc <- function(model) {
+icc <- function(model, bci = FALSE, seed, R = 50, ...) {
 
   clmod <- class(model)[1]
 
@@ -29,7 +33,23 @@ icc <- function(model) {
   
   class(icc) <- append(class(icc), "iccmlm")
   
-  return(icc)
+  if (bci) {
+    if (!missing(seed)) set.seed(seed)
+    bsrun <- boot::boot(data = model$frame, 
+                        statistic = iccmodel, 
+                        R = R, 
+                        fit = model,
+                        ...)
+    bias <- mean(bsrun$t) - bsrun$t0
+    bci <- boot::boot.ci(bsrun, type = 'norm')
+    return(list(bci = c(bci$normal[1], bci$normal[2:3] + bias)))    
+    
+  } 
+  else {
+    bci <- NULL
+  }
+  
+  return(list(icc = icc, bci = bci))
 }
 
 #' print method for an object of class iccmlm
@@ -63,27 +83,4 @@ iccmodel <- function(data, indices, fit){
   d <- data[indices, ]
   fit <- update(fit, data = d)
   icc(fit)
-}
-
-#' Bootstrap standard error for the ICC
-#' 
-#' @param x An object of class `iccmlm`.
-#' @param ... Further arguments passed to [boot::boot()].
-#' @export
-bootci <- function(x, ...) {
-  UseMethod("bootci")  
-}
- 
-#' @export
-bootci.iccmlm <- function(x, fit, data, seed, ...) {
-  if (!missing(seed)) set.seed(seed)
-  if (!exists("R")) R <- 50
-  bsrun <- boot::boot(data = data, 
-                      statistic = iccmodel, 
-                      R = R, 
-                      fit = fit, 
-                      ...)
-  bias <- mean(bsrun$t) - bsrun$t0
-  bci <- boot::boot.ci(bsrun, type = 'norm')
-  return(list(bci = c(bci$normal[1], bci$normal[2:3] + bias)))
 }
