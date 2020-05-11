@@ -18,3 +18,9 @@
 \description{
 print method for an object of class iccmlm
 }
+\examples{
+require(lme4)
+fm1 <- lmer(Reaction ~ Days + (1 | Subject), sleepstudy)
+summary(fm1)
+print(icc(fm1, bci = TRUE, seed = 12345), percent = TRUE, digits = 2)
+}

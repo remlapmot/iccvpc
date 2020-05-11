@@ -4,14 +4,34 @@
 \alias{icc}
 \title{Calculate ICC from an object of class lmerMod or glmerMod}
 \usage{
-icc(model)
+icc(model, bci = FALSE, seed, R = 50, ...)
 }
 \arguments{
 \item{model}{Object of class either \code{lmerMod} or \code{glmerMod} (fitted with \code{family = "gaussian"}).}
+
+\item{bci}{Logical, indicating whether to return a bootstrap confidence interval for the ICC. The default is \code{FALSE}.}
+
+\item{seed}{Random number seed to make the bootrstrapping reproducible.}
+
+\item{R}{The number of bootstrap replicates. The default is \code{50}.}
+
+\item{...}{Further arguments passed to \code{\link[boot:boot.ci]{boot::boot.ci()}} for the bootstrap confidence interval.}
 }
 \value{
-Object of class \code{iccmlm} containing the ICC.
+Object of class \code{iccmlm} containing the following elements:
+\itemize{
+\item \code{icc} the ICC
+\item \code{bci} if specified, the bootstrap confidence interval.
+}
 }
 \description{
 Calculate ICC from an object of class lmerMod or glmerMod
+}
+\examples{
+require(lme4)
+# fit random intercept model, with fixed effect for Days
+fm1 <- lmer(Reaction ~ Days + (1 | Subject), sleepstudy)
+summary(fm1)
+icc(fm1)
+icc(fm1, bci = TRUE, seed = 12345)
 }
