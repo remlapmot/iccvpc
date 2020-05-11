@@ -60,7 +60,9 @@ icc <- function(model, bci = FALSE, seed, R = 50, ...) {
 #' @param ... Additional arguments passed to [`print`].
 #' 
 #' @export
-print.iccmlm <- function(x, digits = getOption("digits"), percent = FALSE, ...) {
+print.iccmlm <- function(x, 
+                         digits = getOption("digits"), 
+                         percent = FALSE, ...) {
   if (!percent) {
     cat("\nIntra-class correlation coefficient: ")
     cat(round(x[1], digits = digits))
