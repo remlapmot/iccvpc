@@ -41,9 +41,8 @@ icc <- function(model, bci = FALSE, seed, R = 50, ...) {
                         fit = model,
                         ...)
     bias <- mean(bsrun$t) - bsrun$t0
-    bci <- boot::boot.ci(bsrun, type = 'norm')
-    return(list(bci = c(bci$normal[1], bci$normal[2:3] + bias)))    
-    
+    bootci <- boot::boot.ci(bsrun, type = 'norm')
+    bci <- c(bootci$normal[1], bootci$normal[2:3] + bias)
   } 
   else {
     bci <- NULL
