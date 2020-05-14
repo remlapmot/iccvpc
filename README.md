@@ -1,15 +1,15 @@
-# iccmlm: R package for calculating the ICC from a fitted multilevel model
+# iccvpc: R package for calculating the ICC and VPC from a multilevel model
 
-[![Build Status](https://github.com/remlapmot/iccmlm/workflows/R-CMD-check/badge.svg)](https://github.com/remlapmot/iccmlm/actions?workflow=R-CMD-check)
+[![Build Status](https://github.com/remlapmot/iccvpc/workflows/R-CMD-check/badge.svg)](https://github.com/remlapmot/iccvpc/actions?workflow=R-CMD-check)
 
 ## Installation
 
 * You can install the package from this GitHub repository with:
 ```r
 if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
-remotes::install_github("remlapmot/iccmlm")
+remotes::install_github("remlapmot/iccvpc")
 ```
-* Update the package by running the same command or
+* Update the package by running the same `install_github()` command above or
 ```r
 remotes::update_packages()
 ```
