@@ -1,4 +1,4 @@
 library(testthat)
-library(iccmlm)
+library(iccvpc)
 
-test_check("iccmlm")
+test_check("iccvpc")

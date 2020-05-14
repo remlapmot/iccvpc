@@ -7,7 +7,7 @@
 #' @param ... Further arguments passed to [boot::boot.ci()] for the bootstrap confidence interval.
 #' 
 #' @export
-#' @return Object of class `iccmlm` containing the following elements:
+#' @return Object of class `iccvpc` containing the following elements:
 #' * `icc` the ICC
 #' * `bci` if specified, the bootstrap confidence interval.
 #' @examples
@@ -54,14 +54,14 @@ icc <- function(model, bci = FALSE, seed, R = 50, ...) {
   }
   
   retlist <- list(icc = icc, bci = bci)
-  class(retlist) <- append(class(retlist), "iccmlm")
+  class(retlist) <- append(class(retlist), "iccvpc")
   
   return(retlist)
 }
 
-#' print method for an object of class iccmlm
+#' print method for an object of class iccvpc
 #'
-#' @param x Object of class iccmlm
+#' @param x Object of class iccvpc
 #' @param digits minimal number of \emph{significant} digits, see \code{\link{print.default}}.
 #' @param percent Logical indicating whether the ICC should be reported as a percentage.
 #' @param ... Additional arguments passed to [`print`].
@@ -72,7 +72,7 @@ icc <- function(model, bci = FALSE, seed, R = 50, ...) {
 #' summary(fm1)
 #' print(icc(fm1, bci = TRUE, seed = 12345), percent = TRUE, digits = 2)
 #' @export
-print.iccmlm <- function(x, 
+print.iccvpc <- function(x, 
                          digits = getOption("digits"), 
                          percent = FALSE, ...) {
   if (!percent) mult <- 1 else mult <- 100

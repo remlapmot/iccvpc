@@ -18,7 +18,7 @@ icc(model, bci = FALSE, seed, R = 50, ...)
 \item{...}{Further arguments passed to \code{\link[boot:boot.ci]{boot::boot.ci()}} for the bootstrap confidence interval.}
 }
 \value{
-Object of class \code{iccmlm} containing the following elements:
+Object of class \code{iccvpc} containing the following elements:
 \itemize{
 \item \code{icc} the ICC
 \item \code{bci} if specified, the bootstrap confidence interval.

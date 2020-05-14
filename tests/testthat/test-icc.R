@@ -33,7 +33,7 @@ test_that("Pass model of incorrect class to icc()", {
   expect_error(icc(lm.D9))
 })
 
-test_that("Test print method for class iccmlm", {
+test_that("Test print method for class iccvpc", {
   expect_output(print(iccpkg))
 })
 
